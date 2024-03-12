@@ -1,4 +1,6 @@
-require("ubuntu.set")
+--_G.myConfigCondition = "coleman"
+_G.myConfigCondition = "qwerty"
 
-require("ubuntu.toggle_config").toggleConfig()
-print("hei")
+require("ubuntu.set")
+require("ubuntu.remap")
+
