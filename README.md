@@ -1,1 +1,2 @@
-# nvim-ubuntu
+# nvim config for Qwerty and Coleman
+
