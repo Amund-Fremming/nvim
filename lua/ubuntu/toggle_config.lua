@@ -82,12 +82,12 @@ M.toggleConfig = function()
     if _G.myConfigCondition == "coleman" then
         clearQwertyRemaps()
         _G.myConfigCondition = "coleman"
-        require("lua.ubuntu.coleman_remap").toggleConfig()
+        require("coleman_remap").toggleConfig()
         print("coleman config set")
     else
         clearColemanRemaps()
         _G.myConfigCondition = "qwerty"
-        require("lua.ubuntu.remap").toggleConfig()
+        require("default_remap").toggleConfig()
         print("qwert config set")
     end
 end

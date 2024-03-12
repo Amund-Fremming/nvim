@@ -1,6 +1,6 @@
 local M = {}
 
-M.toggleConfig = function ()
+M.toggleConfig = function()
     vim.g.mapleader = " "
     vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
