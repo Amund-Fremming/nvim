@@ -1,0 +1,26 @@
+-- Toggles between coleman and qwert keymaps
+local M = {}
+
+local function clearColemanKeymaps()
+   -- Clear all keymaps for coleman 
+   print("Alle coleman keymaps cleared")
+end
+
+local function clearQwertyKeymaps()
+   -- Clear all keymaps for coleman 
+   print("Alle qwerty keymaps cleared")
+end
+
+M.toggleConfig = function()
+    if _G.myConfigCondition == "qwerty" then
+        clearQwertyKeymaps()
+        _G.myConfigCondition = "coleman"
+    else
+        clearColemanKeymaps()
+        _G.myConfigCondition = "qwerty"
+    end
+
+    require("../../after/plugin/harpoon").applyConfig()
+end
+
+return M
