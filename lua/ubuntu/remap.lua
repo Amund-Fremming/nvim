@@ -10,9 +10,6 @@ local function clearQwertyRemaps()
     -- Paste from copy buffer without loosing the buffer
     vim.keymap.set("x", "<leader>p", "\"_dP")
 
-    -- Half page jump with cursor in center - DONT WORK!!!!!!!!!!!
-    vim.keymap.set("n", "<leader>t", "\"_d")
-    vim.keymap.set("v", "<leader>t", "\"_d")
 
     -- This is going to get me cancelled
     vim.keymap.set("i", "<C-s>", "<Esc>")
@@ -89,6 +86,12 @@ local function clearColemanRemaps()
 end
 
 local function applyConfig()
+    -- Half page jump with cursor in center - DONT WORK!!!!!!!!!!!
+    -- vim.api.nvim_set_keymap('n', '<C-u>', ':HalfPageUp<CR>zz', { noremap = true, silent = true })
+    -- vim.api.nvim_set_keymap('n', '<C-d>', ':HalfPageDown<CR>zz', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<C-d>', '<nop>', { noremap = true, silent = true })
+
     if _G.myConfigCondition == "qwerty" then
         clearColemanRemaps()
         vim.g.mapleader = " "
@@ -101,9 +104,7 @@ local function applyConfig()
         -- Paste from copy buffer without loosing the buffer
         vim.keymap.set("x", "<leader>p", "\"_dP")
 
-        -- Half page jump with cursor in center - DONT WORK!!!!!!!!!!!
-        vim.keymap.set("n", "<leader>t", "\"_d")
-        vim.keymap.set("v", "<leader>t", "\"_d")
+        -- Half page jump with cursor in center - TODO
 
         -- This is going to get me cancelled
         vim.keymap.set("i", "<C-s>", "<Esc>")
@@ -119,6 +120,9 @@ local function applyConfig()
 
         -- Change all words equal to this word
         vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+        -- Get ful error message inside window
+        vim.keymap.set("n", "<leader>e", "<cmd>:lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 
         -- Make file executable
         vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
@@ -195,8 +199,6 @@ local function applyConfig()
         -- Save
         vim.keymap.set("n", "<leader><leader>", "<Cmd>:w<CR>")
 
-        -- UNDER HER MÅ LEGGES TIL Å CLEAR COLEMAN REMAPS OG TESTES
-
         -- Jump to top / bottom of document
         vim.keymap.set("n", "<leader>u", "gg", { noremap = true, silent = true })
         vim.keymap.set("n", "<leader>e", "G", { noremap = true, silent = true })
@@ -208,6 +210,10 @@ local function applyConfig()
         -- Append, Replace character, remove character
         vim.keymap.set("n", "s", "a", { noremap = true, silent = true })
         vim.keymap.set("n", "a", "x", { noremap = true, silent = true })
+
+        -- Get ful error message inside window
+        vim.keymap.set("n", "<leader>e", "<cmd>:lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+
 
         -- Esc
         -- hvordan få brukt ctrl, kanskje remappe æ
