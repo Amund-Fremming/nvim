@@ -3,4 +3,3 @@ _G.myConfigCondition = "qwerty"
 
 require("ubuntu.set")
 require("ubuntu.remap")
-
