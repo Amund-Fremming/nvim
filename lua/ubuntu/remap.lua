@@ -1,5 +1,14 @@
+-- Define the autocmd group
+local group = vim.api.nvim_create_augroup("NetrwRemap", { clear = true })
+
+-- Remap 'u' to navigate up in the file listing within Netrw
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "netrw",
+    command = "nnoremap <buffer> u <Up>",
+    group = group,
+})
+
 local function clearQwertyRemaps()
-    print("Cleared Qwerty remaps")
     vim.g.mapleader = " "
     vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -10,28 +19,14 @@ local function clearQwertyRemaps()
     -- Paste from copy buffer without loosing the buffer
     vim.keymap.set("x", "<leader>p", "\"_dP")
 
-
     -- This is going to get me cancelled
     vim.keymap.set("i", "<C-s>", "<Esc>")
 
     -- For national security
     vim.keymap.set("n", "Q", "<nop>")
-
-    -- Navigation local and global for errors and grep search
-    vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-    vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-    vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-    vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
-    -- Change all words equal to this word
-    vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
-    -- Make file executable
-    vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 end
 
 local function clearColemanRemaps()
-    print("Cleared Coleman remaps")
     -- Arrow keys
     vim.keymap.set("n", "u", "u", { silent = true })
     vim.keymap.set("n", "n", "n", { silent = true })
@@ -58,15 +53,17 @@ local function clearColemanRemaps()
 
     -- Visual, Insert, Esc
     vim.keymap.set('n', 't', 't', { noremap = true, silent = true })
-    vim.keymap.set("n", "<C-s>", "<Esc>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<C-s>", "<C-s>", { noremap = true, silent = true })
 
     -- Delete, Yank, Undo, Paste
     vim.keymap.set("n", "m", "m", { noremap = true, silent = true })
     vim.keymap.set("n", "h", "h", { noremap = true, silent = true })
+    vim.keymap.set("n", "hh", "hh", { noremap = true, silent = true })
 
     -- Delete, Yank, Undo, Paste
     vim.keymap.set("v", "m", "m", { noremap = true, silent = true })
     vim.keymap.set("v", "h", "h", { noremap = true, silent = true })
+    vim.keymap.set("v", "hh", "hh", { noremap = true, silent = true })
 
     -- Set jumping back to normal
     vim.keymap.set("v", "0", "0", { noremap = true, silent = true })
@@ -151,11 +148,10 @@ local function applyConfig()
 
         -- Saving
         vim.keymap.set("n", "<leader><leader>", "<Cmd>:w<CR>")
-        print("QWERTY keymaps set!")
     elseif _G.myConfigCondition == "coleman" then
         clearQwertyRemaps()
         vim.g.mapleader = " "
-        vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+        vim.keymap.set("n", "<leader>pp", vim.cmd.Ex)
 
         -- Moving highlighted text up and down
         vim.keymap.set("v", "E", ":m '>+1<CR>gv=gv")
@@ -203,6 +199,12 @@ local function applyConfig()
         vim.keymap.set("v", "Y", "$", { noremap = true, silent = true })
         vim.keymap.set("v", "L", "0", { noremap = true, silent = true })
 
+        -- Jumping words and lines operation mode
+        vim.keymap.set("o", "y", "w", { noremap = true, silent = true })
+        vim.keymap.set("o", "l", "b", { noremap = true, silent = true })
+        vim.keymap.set("o", "Y", "$", { noremap = true, silent = true })
+        vim.keymap.set("o", "L", "0", { noremap = true, silent = true })
+
         -- Visual, Insert, Esc
         vim.keymap.set('n', 't', '<Cmd>startinsert<CR>', { noremap = true, silent = true })
         vim.keymap.set("n", "<C-t>", "<Esc>", { noremap = true, silent = true })
@@ -210,10 +212,12 @@ local function applyConfig()
         -- Delete, Yank, Undo, Paste
         vim.keymap.set("n", "m", "u", { noremap = true, silent = true })
         vim.keymap.set("n", "h", "y", { noremap = true, silent = true })
+        vim.keymap.set("n", "hh", "yy", { noremap = true, silent = true })
 
         -- Delete, Yank, Undo, Paste
         vim.keymap.set("v", "m", "u", { noremap = true, silent = true })
         vim.keymap.set("v", "h", "y", { noremap = true, silent = true })
+        vim.keymap.set("v", "hh", "yy", { noremap = true, silent = true })
 
         -- Save
         vim.keymap.set("n", "<leader><leader>", "<Cmd>:w<CR>")
@@ -231,12 +235,12 @@ local function applyConfig()
         vim.keymap.set("n", "a", "x", { noremap = true, silent = true })
 
         -- Get ful error message inside window
-        vim.keymap.set("n", "<leader>e", "<cmd>:lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>o", "<cmd>:lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+
 
 
         -- Esc
         -- hvordan få brukt ctrl, kanskje remappe æ
-        print("COLEMAN keymaps set!")
     end
 end
 
