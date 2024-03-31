@@ -86,7 +86,29 @@ local function clearColemanRemaps()
 end
 
 local function applyConfig()
-    -- Half page jump with cursor in center - DONT WORK!!!!!!!!!!!
+    -- Tmux sessionizer
+    vim.keymap.set('n', '<C-q>', function()
+        vim.cmd('silent !tmux neww tmux-sessionizer.sh')
+    end, { noremap = true, silent = true })
+
+
+    function create_tmux_key_mappings()
+        local session_names = vim.fn.systemlist("tmux list-sessions | awk '{print $1}'")
+        local i = 1
+        for _, session_name in ipairs(session_names) do
+            vim.keymap.set("n", "<leader>" .. i, function()
+                vim.cmd('silent !tmux switch-client -t ' .. session_name)
+            end, { noremap = true, silent = true })
+            i = i + 1
+        end
+    end
+
+    -- Create tmux key mappings initially
+    create_tmux_key_mappings()
+
+    -- Update tmux key mappings whenever a tmux session is entered or left
+    vim.cmd([[autocmd VimEnter,VimLeave * lua create_tmux_key_mappings()]])
+
     -- vim.api.nvim_set_keymap('n', '<C-u>', ':HalfPageUp<CR>zz', { noremap = true, silent = true })
     -- vim.api.nvim_set_keymap('n', '<C-d>', ':HalfPageDown<CR>zz', { noremap = true, silent = true })
     vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>', { noremap = true, silent = true })
@@ -126,9 +148,6 @@ local function applyConfig()
 
         -- Make file executable
         vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
-        -- Tmux new session (Needs more setup)
-        -- vim.keymap.set("n", "<C-q>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
         -- Saving
         vim.keymap.set("n", "<leader><leader>", "<Cmd>:w<CR>")
