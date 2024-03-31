@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local function clearQwertyRemaps()
-    print("Cleared Qwerty remaps")
     vim.g.mapleader = " "
     vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -28,7 +27,6 @@ local function clearQwertyRemaps()
 end
 
 local function clearColemanRemaps()
-    print("Cleared Coleman remaps")
     -- Arrow keys
     vim.keymap.set("n", "u", "u", { silent = true })
     vim.keymap.set("n", "n", "n", { silent = true })
@@ -60,10 +58,12 @@ local function clearColemanRemaps()
     -- Delete, Yank, Undo, Paste
     vim.keymap.set("n", "m", "m", { noremap = true, silent = true })
     vim.keymap.set("n", "h", "h", { noremap = true, silent = true })
+    vim.keymap.set("n", "hh", "hh", { noremap = true, silent = true })
 
     -- Delete, Yank, Undo, Paste
     vim.keymap.set("v", "m", "m", { noremap = true, silent = true })
     vim.keymap.set("v", "h", "h", { noremap = true, silent = true })
+    vim.keymap.set("v", "hh", "hh", { noremap = true, silent = true })
 
     -- Set jumping back to normal
     vim.keymap.set("v", "0", "0", { noremap = true, silent = true })
@@ -129,7 +129,6 @@ local function applyConfig()
 
         -- Saving
         vim.keymap.set("n", "<leader><leader>", "<Cmd>:w<CR>")
-        print("QWERTY keymaps set!")
     elseif _G.myConfigCondition == "coleman" then
         clearQwertyRemaps()
         vim.g.mapleader = " "
@@ -194,10 +193,12 @@ local function applyConfig()
         -- Delete, Yank, Undo, Paste
         vim.keymap.set("n", "m", "u", { noremap = true, silent = true })
         vim.keymap.set("n", "h", "y", { noremap = true, silent = true })
+        vim.keymap.set("n", "hh", "yy", { noremap = true, silent = true })
 
         -- Delete, Yank, Undo, Paste
         vim.keymap.set("v", "m", "u", { noremap = true, silent = true })
         vim.keymap.set("v", "h", "y", { noremap = true, silent = true })
+        vim.keymap.set("v", "hh", "yy", { noremap = true, silent = true })
 
         -- Save
         vim.keymap.set("n", "<leader><leader>", "<Cmd>:w<CR>")
@@ -221,7 +222,6 @@ local function applyConfig()
 
         -- Esc
         -- hvordan få brukt ctrl, kanskje remappe æ
-        print("COLEMAN keymaps set!")
     end
 end
 
