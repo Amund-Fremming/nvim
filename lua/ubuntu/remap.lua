@@ -84,7 +84,7 @@ end
 
 local function applyConfig()
     -- Tmux sessionizer
-    vim.keymap.set('n', '<leader>g', function()
+    vim.keymap.set('n', '<C-q>', function()
         vim.cmd('silent !tmux neww tmux-sessionizer.sh')
     end, { noremap = true, silent = true })
 
@@ -132,7 +132,7 @@ local function applyConfig()
     elseif _G.myConfigCondition == "coleman" then
         clearQwertyRemaps()
         vim.g.mapleader = " "
-        vim.keymap.set("n", "<leader>pp", vim.cmd.Ex)
+        vim.keymap.set("n", "<leader>d", vim.cmd.Ex)
 
         -- Moving highlighted text up and down
         vim.keymap.set("v", "E", ":m '>+1<CR>gv=gv")
@@ -188,9 +188,9 @@ local function applyConfig()
 
         -- Visual, Insert, Esc
         vim.keymap.set('n', 't', '<Cmd>startinsert<CR>', { noremap = true, silent = true })
-        vim.keymap.set("i", "<End>", "<Esc>", { noremap = true, silent = true })
-        vim.keymap.set("n", "<End>", "<Esc>", { noremap = true, silent = true })
-        vim.keymap.set("v", "<End>", "<Esc>", { noremap = true, silent = true })
+        vim.keymap.set("i", "<C-t>", "<Esc>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<C-t>", "<Esc>", { noremap = true, silent = true })
+        vim.keymap.set("v", "<C-t>", "<Esc>", { noremap = true, silent = true })
 
 
         -- Delete, Yank, Undo, Paste
@@ -218,10 +218,9 @@ local function applyConfig()
         vim.keymap.set("n", "s", "a", { noremap = true, silent = true })
         vim.keymap.set("n", "a", "x", { noremap = true, silent = true })
 
+        --
         -- Get ful error message inside window
-        vim.keymap.set("n", "<leader>o", "<cmd>:lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
-
-
+        vim.keymap.set("n", "<leader>w", "<cmd>:lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 
         -- Esc
         -- hvordan få brukt ctrl, kanskje remappe æ

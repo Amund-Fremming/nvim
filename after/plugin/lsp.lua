@@ -34,7 +34,7 @@ cmp.setup({
         ['<C-u>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
         ['<C-e>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
         ['<C-f>'] = cmp.mapping.confirm({ select = true }), -- Confirm with <leader>c
-        ['<C-Space>'] = cmp.mapping.complete(),             -- Manually trigger completion with <leader>cp
+        ['<C-g>'] = cmp.mapping.complete(),                 -- Manually trigger completion with <leader>cp
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
