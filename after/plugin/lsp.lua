@@ -42,12 +42,3 @@ cmp.setup({
     }),
     -- Include other configurations as needed
 })
-
--- Configuration for null-ls to use Prettier
-require('null-ls').setup({
-    sources = {
-        require('null-ls').builtins.formatting.prettier.with({
-            extra_args = { "--double-quote", "--jsx-double-quote", "--trailing-comma", "es5" },
-        }),
-    },
-})
